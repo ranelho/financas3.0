@@ -1,5 +1,6 @@
 package com.rlti.financas.despesas.application.api;
 
+import com.rlti.financas.parcelas.application.api.ParcelaListResponse;
 import com.rlti.financas.parcelas.application.api.ParcelaRequest;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -20,4 +21,12 @@ public interface DespesaApi {
     @GetMapping(value = "/{idDespesa}")
     @ResponseStatus(code = HttpStatus.OK)
     DespesaDetalhadoResponse getDespesaAtravesId(@PathVariable UUID idDespesa);
+
+    @GetMapping(value = "/allDespesas")
+    @ResponseStatus(code = HttpStatus.OK)
+    List<DespesaListResponse> getTodasParcelas();
+
+    @DeleteMapping("/{idDespesa}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void deleteDespesa(@PathVariable UUID idDespesa);
 }

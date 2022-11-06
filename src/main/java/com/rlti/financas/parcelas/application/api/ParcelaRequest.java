@@ -19,5 +19,5 @@ public class ParcelaRequest {
     private Double valorParcela;
     private LocalDate dataParcela;
     private Situacao situacao ;
-    private UUID despesaId;
+    private UUID idDespesa;
 }

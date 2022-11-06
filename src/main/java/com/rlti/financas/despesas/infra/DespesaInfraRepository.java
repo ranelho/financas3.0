@@ -1,6 +1,5 @@
 package com.rlti.financas.despesas.infra;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -34,5 +33,18 @@ public class DespesaInfraRepository implements DespesaRepository {
 		log.info("[final] DespesaInfraRepository - buscaDespesaPorId");
 		return despesa;
 
+	}
+    @Override
+    public List<Despesa> findDespesas() {
+		log.info("[inicia] DespesaInfraRepository - findDespesas");
+		List<Despesa> despesa = despesaMongoRepository.findAll();
+		log.info("[finaliza] DespesaInfraRepository - findDespesas");
+		return despesa;
+    }
+	@Override
+	public void deletaDespesa(UUID idDespesa) {
+		log.info("[inicia] DespesaInfraRepository - deletaDespesa");
+		despesaMongoRepository.deleteById(idDespesa);
+		log.info("[finaliza] DespesaInfraRepository - deletaDespesa");
 	}
 }

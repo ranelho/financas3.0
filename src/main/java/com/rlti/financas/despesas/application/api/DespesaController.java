@@ -35,4 +35,19 @@ public class DespesaController implements DespesaApi {
 		log.info("[finaliza] DespesaController - getDespesaAtravesId");
 		return new DespesaDetalhadoResponse(despesa);
 	}
+
+	@Override
+	public List<DespesaListResponse> getTodasParcelas() {
+		log.info("[inicia] DespesaController - getTodasParcelas");
+		List<DespesaListResponse> listaDespesas = despesaService.buscaTodasDespesas();
+		log.info("[finaliza] DespesaController - getTodasParcelas");
+		return listaDespesas;
+	}
+
+	@Override
+	public void deleteDespesa(UUID idDespesa) {
+		log.info("[inicia] DespesaController - deleteDespesa");
+		despesaService.deletaDespesa(idDespesa);
+		log.info("[inicia] DespesaController - deleteDespesa");
+	}
 }

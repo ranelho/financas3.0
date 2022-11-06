@@ -31,7 +31,7 @@ public class Parcela {
     @NotNull
     private Situacao situacao = Situacao.A_PAGAR ;
     @NotNull
-    private UUID despesaId;
+    private UUID idDespesa;
 
     public Parcela(UUID idDespesa, ParcelaRequest parcelaRequest) {
         this.idParcela = UUID.randomUUID();
@@ -40,7 +40,7 @@ public class Parcela {
         this.valorParcela = parcelaRequest.getValorParcela();
         this.dataParcela = parcelaRequest.getDataParcela();
         this.situacao = Situacao.A_PAGAR;
-        this.despesaId = idDespesa;
+        this.idDespesa = idDespesa;
     }
 
     public void pago(UUID idDespesa) {

@@ -3,6 +3,7 @@ package com.rlti.financas.despesas.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.rlti.financas.despesas.application.api.DespesaAlteracaoRequest;
 import com.rlti.financas.despesas.application.api.DespesaRequest;
+import com.rlti.financas.parcelas.domain.Parcela;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +13,7 @@ import org.springframework.data.annotation.Id;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -31,6 +33,7 @@ public class Despesa {
 	private int quantidadeParcelas;
 	@NotNull
 	private Double valorTotal;
+	private List<Parcela> parcelas;
 
 	public Despesa(DespesaRequest despesaRequest) {
 		this.idDespesa = UUID.randomUUID();
@@ -39,6 +42,7 @@ public class Despesa {
 		this.dataPagamento = despesaRequest.getDataPagamento();
 		this.quantidadeParcelas = despesaRequest.getQuantidadeParcelas();
 		this.valorTotal = despesaRequest.getValorTotal();
+		this.parcelas = despesaRequest.getParcelas();
 	}
 	public void altera(@Valid DespesaAlteracaoRequest despesaAlteracaoRequest) {
 		this.categoria = despesaAlteracaoRequest.getCategoria();

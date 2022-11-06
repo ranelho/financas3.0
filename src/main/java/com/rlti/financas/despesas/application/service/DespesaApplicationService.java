@@ -36,13 +36,14 @@ public class DespesaApplicationService implements DespesaService {
 		log.info("[inicia] - DespesaApplicationService - criaDespesa");
 		Despesa despesas = despesaRepository.salva(new Despesa(despesaRequest));
 		double valorParcela = despesaRequest.getValorTotal() / despesaRequest.getQuantidadeParcelas();
+		UUID idDespesa = despesas.getIdDespesa();
 		for (int count = 1; count <= despesaRequest.getQuantidadeParcelas(); count++) {
 			statusParcela = count + "/" + despesaRequest.getQuantidadeParcelas();
 			parcelaRequest.setValorParcela(valorParcela);
 			parcelaRequest.setDataParcela(ValidaMes.validaMes(despesaRequest.getDataPagamento(), count));
 			parcelaRequest.setDescricao(despesaRequest.getDescricao());
 			parcelaRequest.setQuantidadeParcelas(statusParcela);
-			parcelaRepository.salva(new Parcela(despesas.getIdDespesa(),parcelaRequest));
+			parcelaRepository.salva(new Parcela(idDespesa,parcelaRequest));
 			log.info("[finaliza] - DespesaApplicationService - criaDespesa");
 		}
 		return DespesaResponse.builder().idDespesa(despesas.getIdDespesa()).build();
@@ -55,6 +56,22 @@ public class DespesaApplicationService implements DespesaService {
 				.orElseThrow(() -> APIException.build(HttpStatus.NOT_FOUND, "Despesa não encontrada!"));
 		log.info("[finaliza] - DespesaApplicationService - buscaDespesaAtravesId");
 		return despesa;
+	}
+
+    @Override
+    public List<DespesaListResponse> buscaTodasDespesas() {
+		log.info("[inicia] - DespesaApplicationService - buscaTodasDespesas");
+		List<Despesa> despesas = despesaRepository.findDespesas();
+		log.info("[inicia] - DespesaApplicationService - buscaTodasDespesas");
+		return DespesaListResponse.converte(despesas);
+    }
+
+	@Override
+	public void deletaDespesa(UUID idDespesa) {
+		log.info("[inicia] - DespesaApplicationService - deletaDespesa");
+		buscaDespesaAtravesId(idDespesa);
+		despesaRepository.deletaDespesa(idDespesa);
+		log.info("[finaliza] - DespesaApplicationService - deletaDespesa");
 	}
 }
 

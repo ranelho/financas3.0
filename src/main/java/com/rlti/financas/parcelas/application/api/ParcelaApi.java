@@ -1,5 +1,6 @@
 package com.rlti.financas.parcelas.application.api;
 
+import com.rlti.financas.despesas.application.api.DespesaDetalhadoResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,4 +14,20 @@ public interface ParcelaApi {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     ParcelaIdResponse postParcela(@PathVariable UUID idDespesa, @Valid @RequestBody ParcelaRequest parcelaRequest);
+
+    @GetMapping(value = "/allParcelasDespesa/")
+    @ResponseStatus(code = HttpStatus.OK)
+    List<ParcelaListResponse> getTodasParcelasDespesa(@RequestParam UUID idDespesa);
+
+    @GetMapping(value = "/allParcelas")
+    @ResponseStatus(code = HttpStatus.OK)
+    List<ParcelaListResponse> getTodasParcelas();
+
+    @DeleteMapping("/{idParcela}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    void deleteParcela(@PathVariable UUID idParcela);
+
+    @GetMapping(value = "/{idParcela}")
+    @ResponseStatus(code = HttpStatus.OK)
+    ParcelaDetalhadoResponse getParcelaAtravesId(@PathVariable UUID idParcela);
 }

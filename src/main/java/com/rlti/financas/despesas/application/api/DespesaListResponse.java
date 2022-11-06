@@ -6,6 +6,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.rlti.financas.parcelas.domain.Parcela;
 import org.springframework.http.HttpStatus;
 
 import com.rlti.financas.despesas.domain.Categoria;
@@ -20,8 +21,9 @@ public class DespesaListResponse {
 	private Categoria categoria;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate dataPagamento;
-	private int parcelas;
+	private int quantidadeParcelas;
 	private Double valorTotal;
+	private List<Parcela> parcelas;
 	public static List<DespesaListResponse> converte(List<Despesa> despesas) {
 		if (despesas.isEmpty()) {
 			throw APIException.build(HttpStatus.NOT_FOUND, "Nenhuma tarefa econtrada!");
@@ -35,15 +37,8 @@ public class DespesaListResponse {
 		this.idDespesa = despesa.getIdDespesa();
 		this.categoria = despesa.getCategoria();
 		this.dataPagamento = despesa.getDataPagamento();
-		this.parcelas = despesa.getQuantidadeParcelas();
+		this.quantidadeParcelas = despesa.getQuantidadeParcelas();
 		this.valorTotal = despesa.getValorTotal();
-	}
-
-	public DespesaListResponse(LocalDate dataPagamento, int parcela, double valor) {
-		this.idDespesa = null;
-		this.categoria = null;
-		this.dataPagamento = dataPagamento;
-		this.parcelas = parcela;
-		this.valorTotal = valor;
+		this.parcelas = despesa.getParcelas();
 	}
 }

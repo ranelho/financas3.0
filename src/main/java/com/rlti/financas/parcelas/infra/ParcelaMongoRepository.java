@@ -7,4 +7,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ParcelaMongoRepository extends MongoRepository<Parcela, UUID> {
+    List<Parcela> findAllByIdDespesa(UUID idDespesa);
 }

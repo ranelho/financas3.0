@@ -10,4 +10,6 @@ import com.rlti.financas.despesas.domain.Despesa;
 public interface DespesaRepository {
 	Despesa salva(Despesa despesa);
 	Optional<Despesa> buscaDespesaPorId(UUID idDespesa);
+    List<Despesa> findDespesas();
+	void deletaDespesa(UUID idDespesa);
 }

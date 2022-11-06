@@ -16,4 +16,6 @@ import com.rlti.financas.parcelas.application.api.ParcelaRequest;
 public interface DespesaService {
 	DespesaResponse criaDespesa(DespesaRequest despesaRequest, ParcelaRequest parcelaRequest);
 	Despesa buscaDespesaAtravesId(UUID idDespesa);
+    List<DespesaListResponse> buscaTodasDespesas();
+	void deletaDespesa(UUID idDespesa);
 }
