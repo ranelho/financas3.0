@@ -1,0 +1,13 @@
+server:
+  servlet:
+    context-path: /financas/api
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:852456@localhost:27017
+      database: financas30
+
+springdoc:
+  swagger-ui:
+    path: /public/swagger
